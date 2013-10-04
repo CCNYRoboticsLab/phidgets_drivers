@@ -1,20 +1,31 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+cmake_minimum_required(VERSION 2.8.3)
 
-# Set the build type.  Options are:
-#  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
-#  Debug          : w/ debug symbols, w/o optimization
-#  Release        : w/o debug symbols, w/ optimization
-#  RelWithDebInfo : w/ debug symbols, w/ optimization
-#  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-set(ROS_BUILD_TYPE RelWithDebInfo)
+project(phidgets_api)
 
-rosbuild_init()
+find_package(catkin REQUIRED COMPONENTS phidgets_c_api)
 
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES phidgets_api
+  CATKIN_DEPENDS phidgets_c_api
+)
 
-# create phidgets_cpp_api library
-rosbuild_add_library (phidgets_api src/phidget.cpp
-                                   src/imu.cpp
-                                   src/ir.cpp)
+include_directories(include ${catkin_INCLUDE_DIRS})
 
+add_library(phidgets_api src/phidget.cpp
+                         src/imu.cpp
+                         src/ir.cpp)
+
+add_dependencies(phidgets_api phidgets_c_api)
+target_link_libraries(phidgets_api ${catkin_LIBRARIES})
+
+install(TARGETS phidgets_api
+   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY include/${PROJECT_NAME}/
+   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+   FILES_MATCHING PATTERN "*.h"
+)
