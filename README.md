@@ -56,7 +56,7 @@ Make sure your catkin workspace has been successfully compiled.
 To set up the udev rules for the Phidgets USB devices, run the following commands:
 
     cd ~/catkin_ws
-    sh src/phidgets_drivers/phidgets_api/setup-udev.sh
+    sh src/phidgets_drivers/phidgets_api/share/setup-udev.sh
 
 You will be prompted to type in your password.
 
