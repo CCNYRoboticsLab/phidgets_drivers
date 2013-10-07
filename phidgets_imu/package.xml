@@ -32,6 +32,6 @@
   <run_depend>tf</run_depend>
 
   <export>
-    nodelet plugin="${prefix}/phidgets_imu_nodelet.xml" />
+    <nodelet plugin="${prefix}/phidgets_imu_nodelet.xml" />
   </export>
 </package>
