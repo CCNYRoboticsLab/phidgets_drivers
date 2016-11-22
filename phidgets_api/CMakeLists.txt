@@ -2,12 +2,12 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(phidgets_api)
 
-find_package(catkin REQUIRED COMPONENTS libphidgets)
+find_package(catkin REQUIRED COMPONENTS libphidget21)
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES phidgets_api
-  CATKIN_DEPENDS libphidgets
+  CATKIN_DEPENDS libphidget21
 #  DEPENDS
 )
 
@@ -16,6 +16,8 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 add_library(phidgets_api src/phidget.cpp
                          src/imu.cpp
                          src/ir.cpp)
+
+add_dependencies(phidgets_api ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(phidgets_api ${catkin_LIBRARIES})
 
