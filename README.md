@@ -1,3 +1,12 @@
+!!! THIS REPOSITORY IS DEPCRECATED !!!
+======================================
+
+This repo has moved to https://github.com/ros-drivers/phidgets_drivers/ . All
+new development will happen there, so you should update your git URLs.
+
+----------------------------------------------------------------------
+
+
 Phidgets drivers for ROS
 ========================
 
